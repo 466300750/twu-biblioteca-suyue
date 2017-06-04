@@ -6,57 +6,57 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
-    BibliotecaApp bibliotecaApp;
+    LibraryBuilder libraryBuilder;
 
     @Before
     public void before() throws Exception {
-        bibliotecaApp = new BibliotecaApp();
+        libraryBuilder = new LibraryBuilder();
     }
 
     @Test
     public void testDisplayWelcome() throws Exception {
-        assertEquals("Welcome to Biblioteca!", bibliotecaApp.generateWelcomeMessage());
+        assertEquals("Welcome to LibraryBuilder!", libraryBuilder.generateWelcomeMessage());
     }
 
     @Test
     public void testDisplayMenu() {
-        assertEquals(4, bibliotecaApp.getMenuList().size());
+        assertEquals(4, libraryBuilder.getMenuList().size());
     }
 
     @Test
     public void testDisplayBookLists() throws Exception {
-        assertEquals(2, bibliotecaApp.getBookList().size());
+        assertEquals(2, libraryBuilder.getBookList().size());
     }
 
     @Test
     public void testSelectMenuOptionCorrect() throws Exception {
-        assertEquals("List Books", bibliotecaApp.selectMenuOption(1));
+        assertEquals("List Books", libraryBuilder.selectMenuOption(1));
     }
 
     @Test
     public void testSelectMenuOptionWrong() throws Exception {
-        assertEquals("Select a valid option!", bibliotecaApp.selectMenuOption(5));
+        assertEquals("Select a valid option!", libraryBuilder.selectMenuOption(5));
     }
 
     @Test
     public void testCheckOutBookSuccess() throws Exception {
-        assertEquals("Thank you! Enjoy the book.", bibliotecaApp.checkOutBook("Head First Java"));
+        assertEquals("Thank you! Enjoy the book.", libraryBuilder.checkOutBook("Head First Java"));
     }
 
     @Test
     public void testCheckOutBookFail() throws Exception {
-        assertEquals("That book is not available.", bibliotecaApp.checkOutBook("Head First java"));
+        assertEquals("That book is not available.", libraryBuilder.checkOutBook("Head First java"));
     }
 
     @Test
     public void testReturnBookSuccess() throws Exception {
-        bibliotecaApp.checkOutBook("Head First Java");
-        assertEquals("Thank you for returning the book.", bibliotecaApp.returnBook("Head First Java"));
+        libraryBuilder.checkOutBook("Head First Java");
+        assertEquals("Thank you for returning the book.", libraryBuilder.returnBook("Head First Java"));
     }
 
     @Test
     public void testReturnBookFail() throws Exception {
-        bibliotecaApp.checkOutBook("Head First Java");
-        assertEquals("That is not a valid book to return.", bibliotecaApp.returnBook("Head First java"));
+        libraryBuilder.checkOutBook("Head First Java");
+        assertEquals("That is not a valid book to return.", libraryBuilder.returnBook("Head First java"));
     }
 }

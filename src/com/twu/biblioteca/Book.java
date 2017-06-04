@@ -39,9 +39,9 @@ public class Book {
 
         Book book = (Book) o;
 
-        if (publicDate != book.publicDate) return false;
-        if (!name.equals(book.name)) return false;
-        return author.equals(book.author);
+        return publicDate == book.publicDate &&
+                name.equals(book.name) &&
+                author.equals(book.author);
     }
 
     @Override
