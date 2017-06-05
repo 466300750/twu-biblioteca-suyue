@@ -3,25 +3,25 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
-    private LibraryBuilder libraryBuilder;
-    private Displayer displayer;
+    private BookDatabase bookDatabase;
+    private Machine machine;
 
     public BibliotecaApp() {
-        libraryBuilder = new LibraryBuilder();
-        displayer = new Displayer(libraryBuilder);
+        bookDatabase = new BookDatabase();
+        machine = new Machine(bookDatabase);
     }
 
 
     public static void main(String[] args) {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.getDisplayer().display();
+        bibliotecaApp.getMachine().display();
     }
 
-    public LibraryBuilder getLibraryBuilder() {
-        return libraryBuilder;
+    public BookDatabase getBookDatabase() {
+        return bookDatabase;
     }
 
-    public Displayer getDisplayer() {
-        return displayer;
+    public Machine getMachine() {
+        return machine;
     }
 }
