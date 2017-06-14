@@ -3,12 +3,12 @@ package com.twu.biblioteca;
 
 public class BibliotecaApp {
 
-    private BookDatabase bookDatabase;
+    private BookAndMovieDatabase bookAndMovieDatabase;
     private Machine machine;
 
     public BibliotecaApp() {
-        bookDatabase = new BookDatabase();
-        machine = new Machine(bookDatabase);
+        bookAndMovieDatabase = new BookAndMovieDatabase();
+        machine = new Machine(bookAndMovieDatabase);
     }
 
 
@@ -17,8 +17,8 @@ public class BibliotecaApp {
         bibliotecaApp.getMachine().display();
     }
 
-    public BookDatabase getBookDatabase() {
-        return bookDatabase;
+    public BookAndMovieDatabase getBookAndMovieDatabase() {
+        return bookAndMovieDatabase;
     }
 
     public Machine getMachine() {

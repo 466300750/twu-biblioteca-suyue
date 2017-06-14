@@ -7,35 +7,41 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
-    BookDatabase bookDatabase;
+    BookAndMovieDatabase bookAndMovieDatabase;
     Machine machine;
     int bookCount = 4;
+    int movieCount = 3;
     int menuCount = 4;
 
     @Before
     public void before() throws Exception {
-        bookDatabase = new BookDatabase();
-        machine = new Machine(bookDatabase);
+        bookAndMovieDatabase = new BookAndMovieDatabase();
+        machine = new Machine(bookAndMovieDatabase);
     }
 
     @Test
     public void testDisplayWelcome() throws Exception {
-        assertEquals("Welcome to BookDatabase!", bookDatabase.generateWelcomeMessage());
+        assertEquals("Welcome to BookAndMovieDatabase!", bookAndMovieDatabase.generateWelcomeMessage());
     }
 
     @Test
     public void testDisplayMenu() {
-        assertEquals(menuCount, bookDatabase.getMenuList().size());
+        assertEquals(menuCount, bookAndMovieDatabase.getMenuList().size());
     }
 
     @Test
     public void testDisplayBookLists() throws Exception {
-        assertEquals(bookCount, bookDatabase.getBookList().size());
+        assertEquals(bookCount, bookAndMovieDatabase.getBookList().size());
+    }
+
+    @Test
+    public void testDisplayMovieLists() throws Exception {
+        assertEquals(movieCount, bookAndMovieDatabase.getMovieList().size());
     }
 
     @Test
     public void testSelectMenuOptionCorrect() throws Exception {
-        assertEquals("List Books", machine.selectMenuOption(1));
+        assertEquals("Login", machine.selectMenuOption(1));
     }
 
     @Test
@@ -46,28 +52,36 @@ public class ExampleTest {
     @Test
     public void testCheckOutBookSuccess() throws Exception {
         assertEquals("Thank you! Enjoy the book.", machine.checkOutBook("Head First Java"));
-        assertEquals(bookCount-1, bookDatabase.getBookList().size());
+        assertEquals(bookCount-1, bookAndMovieDatabase.getBookList().size());
     }
 
     @Test
     public void testCheckOutBookFail() throws Exception {
         assertEquals("That book is not available.", machine.checkOutBook("Head First java"));
-        assertEquals(bookCount, bookDatabase.getBookList().size());
+        assertEquals(bookCount, bookAndMovieDatabase.getBookList().size());
     }
 
     @Test
     public void testReturnBookSuccess() throws Exception {
         machine.checkOutBook("Head First Java");
-        assertEquals(bookCount-1, bookDatabase.getBookList().size());
+        assertEquals(bookCount-1, bookAndMovieDatabase.getBookList().size());
         assertEquals("Thank you for returning the book.", machine.returnBook("Head First Java"));
-        assertEquals(bookCount, bookDatabase.getBookList().size());
+        assertEquals(bookCount, bookAndMovieDatabase.getBookList().size());
     }
 
     @Test
     public void testReturnBookFail() throws Exception {
         machine.checkOutBook("Head First Java");
-        assertEquals(bookCount-1, bookDatabase.getBookList().size());
+        assertEquals(bookCount-1, bookAndMovieDatabase.getBookList().size());
         assertEquals("That is not a valid book to return.", machine.returnBook("Head First java"));
-        assertEquals(bookCount-1, bookDatabase.getBookList().size());
+        assertEquals(bookCount-1, bookAndMovieDatabase.getBookList().size());
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        assertEquals(menuCount, bookAndMovieDatabase.getMenuList().size());
+        machine.setLoginSuccess(true);
+        machine.handleLogin();
+        assertEquals(9, bookAndMovieDatabase.getMenuList().size());
     }
 }
